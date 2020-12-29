@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="main_proxy.walk_district_view_tree" model="ir.ui.view">
+            <field name="name">walk.district.tree</field>
+            <field name="model">walk.district</field>
+            <field name="type">tree</field>
+            <field name="priority">999</field>
+            <field name="arch" type="xml">
+                <tree string="区" create="0" delete="0">
+               <field name="name"/>
+               <field name="pid"/>
+                </tree>
+            </field>
+        </record>
+        <record id="main_proxy.walk_district_view_form" model="ir.ui.view">
+            <field name="name">walk.district.form</field>
+            <field name="model">walk.district</field>
+            <field name="type">form</field>
+            <field name="priority">999</field>
+            <field name="arch" type="xml">
+                <form string="区" version="7.0" create="0" delete="0" edit="0" save="0" cancel="0" duplicate="0">
+                    <sheet>
+                    <group>
+               <field name="name"/>
+               <field name="pid"/>
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="main_proxy.walk_district_action" model="ir.actions.act_window">
+            <field name="name">区</field>
+            <field name="res_model">walk.district</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="help" type="html"><p></p></field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('main_proxy.walk_district_view_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('main_proxy.walk_district_view_form')}),
+                    ]"/>
+        </record>
+        <menuitem
+                name="区/县"
+                id="main_proxy.walk_district_view"
+                action="main_proxy.walk_district_action"
+                parent="parent_menu_location_menu"
+                sequence="3"
+        />
+
+    </data>
+</openerp>

@@ -8,18 +8,19 @@
                 parent=""
                 sequence="6"
         />
-        <!--web_icon="oejia_weshop,static/description/icon.png"-->
-        <!--        <menuitem -->
-<!--                id="parent_menu_327_1536754696" -->
-<!--                name="配置" -->
-<!--                parent="parent_menu_319_1536754696"  sequence="999"-->
-<!--        />-->
-<!--        <menuitem -->
-<!--                id="parent_menu_331_1536754696" -->
-<!--                name="省市区" -->
-<!--                parent="parent_menu_327_1536754696"  -->
-<!--                sequence="10"-->
-<!--        />-->
+<!--        web_icon="oejia_weshop,static/description/icon.png"-->
+        <menuitem
+                name="设置"
+                id="parent_menu_config_menu"
+                parent="parent_menu_walk_proxy"
+                sequence="999"
+        />
+        <menuitem
+                name="省市区"
+                id="parent_menu_location_menu"
+                parent="parent_menu_config_menu"
+                sequence="10"
+        />
 
     </data>
 </openerp>

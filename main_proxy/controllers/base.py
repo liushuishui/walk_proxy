@@ -8,7 +8,9 @@ from odoo.loglevels import ustr
 
 import json
 from datetime import date, datetime
+import time
 import pytz
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 import logging
 
 _logger = logging.getLogger(__name__)
