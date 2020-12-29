@@ -8,7 +8,7 @@ from .base import RegisterType
 
 
 class WalkUser(models.Model, DataProxy):
-    _name = 'wxapp.user'
+    _name = 'walk.users'
     _description = '微信用户'
     _inherits = {'res.partner': 'partner_id'}
     _order = 'id desc'

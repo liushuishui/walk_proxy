@@ -1,2 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_./apps/walk_proxy/main_proxy_./apps/walk_proxy/main_proxy,./apps/walk_proxy/main_proxy../apps/walk_proxy/main_proxy,model_./apps/walk_proxy/main_proxy_./apps/walk_proxy/main_proxy,base.group_user,1,1,1,1
+access_walk_users,小程序用户,model_walk_users,,1,1,1,1
+access_walk_config,小程序设置,model_walk_config,,1,1,1,1
+access_walk_access_token,小程序token,model_walk_access_token,,1,1,1,1
+access_walk_confirm,小程序token,model_walk_confirm,,1,1,1,1
