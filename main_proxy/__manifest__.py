@@ -27,6 +27,10 @@
         'views/parent_menus.xml',
         'views/walk_user_views.xml',
         'views/walk_config_views.xml',
+        'views/location/walk_province_views.xml',
+        'views/location/walk_city_views.xml',
+        'views/location/walk_district_views.xml',
+        'views/location/walk_community_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

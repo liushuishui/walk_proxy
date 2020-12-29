@@ -3,3 +3,7 @@ access_walk_users,小程序用户,model_walk_users,,1,1,1,1
 access_walk_config,小程序设置,model_walk_config,,1,1,1,1
 access_walk_access_token,小程序token,model_walk_access_token,,1,1,1,1
 access_walk_confirm,小程序token,model_walk_confirm,,1,1,1,1
+access_walk_province,省份,model_walk_province,,1,1,1,1
+access_walk_city,城市,model_walk_city,,1,1,1,1
+access_walk_district,区县,model_walk_district,,1,1,1,1
+access_walk_community,社区,model_walk_community,,1,1,1,1
