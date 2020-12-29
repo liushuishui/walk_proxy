@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="main_proxy.walk_users_view_tree" model="ir.ui.view">
+            <field name="name">walk.users.tree</field>
+            <field name="model">walk.users</field>
+            <field name="type">tree</field>
+<!--            <field name="priority">999</field>-->
+            <field name="arch" type="xml">
+                <tree string="微信用户">
+
+                    <field name="nickname"/>
+                    <field name="avatar"/>
+                    <field name="phone"/>
+
+                    <field name="province"/>
+                    <field name="city"/>
+               <field name="gender"/>
+
+                    <field name="create_date" string="注册时间"/>
+                    <field name="last_login"/>
+<!--                    <field name="status"/>-->
+
+                    <field name="register_type"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="main_proxy.walk_users_view_form" model="ir.ui.view">
+            <field name="name">walk.users.form</field>
+            <field name="model">walk.users</field>
+            <field name="type">form</field>
+<!--            <field name="priority">999</field>-->
+            <field name="arch" type="xml">
+                <form string="微信用户">
+                    <sheet>
+                    <group>
+                    <field name="nickname" readonly="1"/>
+                    <field name="avatar" readonly="1"/>
+                    <field name="phone" readonly="1"/>
+
+                    <field name="country" readonly="1"/>
+                    <field name="province" readonly="1"/>
+                    <field name="city" readonly="1"/>
+               <field name="language" readonly="1"/>
+               <field name="gender" readonly="1"/>
+
+                    <field name="open_id" readonly="1"/>
+                    <field name="union_id" readonly="1"/>
+                    <field name="create_date" string="注册时间" readonly="1"/>
+                    <field name="last_login" readonly="1"/>
+<!--                    <field name="status" readonly="1"/>-->
+
+                    <field name="register_type" readonly="1"/>
+               <field name="register_ip" readonly="1"/>
+               <field name="ip" readonly="1"/>
+
+               <field name="partner_id"/>
+               <field name="address_ids"/>
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="main_proxy.walk_users_action" model="ir.actions.act_window">
+            <field name="name">微信用户</field>
+            <field name="res_model">walk.users</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="help" type="html"><p></p></field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('main_proxy.walk_users_view_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('main_proxy.walk_users_view_form')}),
+                    ]"/>
+        </record>
+        <menuitem
+                name="小程序用户"
+                id="main_proxy.walk_users_view"
+                action="main_proxy.walk_users_action"
+                parent="parent_menu_walk_proxy"
+                sequence="1"
+        />
+
+    </data>
+</openerp>

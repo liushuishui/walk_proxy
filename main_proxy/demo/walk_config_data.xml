@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+    
+        <record id="wxapp_config_data_exam" model="walk.config">
+            <field name="app_id">app_id_xxxxxxxxxxxxxxxx</field>
+            <field name="secret">secret_xxxxxxxxxxxxxxxxxxxxxx</field>
+            <field name="mall_name">代</field>
+            <field name="sub_domain">proxy</field>
+        </record>
+	
+    </data>
+</openerp>

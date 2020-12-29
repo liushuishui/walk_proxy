@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="main_proxy.walk_config_view_tree" model="ir.ui.view">
+            <field name="name">walk.config.tree</field>
+            <field name="model">walk.config</field>
+            <field name="type">tree</field>
+<!--            <field name="priority">999</field>-->
+            <field name="arch" type="xml">
+                <tree string="电商设置">
+               <field name="mall_name"/>
+               <field name="sub_domain"/>
+<!--               <field name="team_id"/>-->
+               <field name="app_id"/>
+                </tree>
+            </field>
+        </record>
+        <record id="main_proxy.walk_config_view_form" model="ir.ui.view">
+            <field name="name">walk.config.form</field>
+            <field name="model">walk.config</field>
+            <field name="type">form</field>
+<!--            <field name="priority">999</field>-->
+            <field name="arch" type="xml">
+                <form string="设置" create="0" delete="0" duplicate="0">
+					<header>
+						<button name="clean_all_token_window" type="object" string="清空Token缓存"/>
+					</header>
+                    <sheet>
+                     <group name="miniapp" string="小程序相关" colspan="4">
+                        <field name="app_id"/>
+                        <field name="secret" password="True"/>
+                        <field name="sub_domain"/>
+                    </group>
+                     <group string="基础配置" colspan="4">
+                        <field name="mall_name"/>
+<!--                        <field name="team_id"/>-->
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="main_proxy.walk_config_action" model="ir.actions.act_window">
+            <field name="name">电商设置</field>
+            <field name="res_model">walk.config</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="res_id">1</field>
+            <field name="help" type="html"><p></p></field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('main_proxy.walk_config_view_form')}),
+                    ]"/>
+        </record>
+        <menuitem
+                name="小程序设置"
+                id="main_proxy.walk_config_view"
+                action="main_proxy.walk_config_action"
+                parent="parent_menu_walk_proxy"
+                sequence="99"/>
+
+    </data>
+</openerp>
