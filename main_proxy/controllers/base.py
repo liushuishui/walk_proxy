@@ -149,7 +149,7 @@ class BaseController(object):
         if data != None:
             ret['data'] = data
         return request.make_response(
-            headers={'Content-Type': 'json'},
+            headers={'Content-Type': 'application/json'},
             data=json.dumps(ret, default=json_default)
         )
 
@@ -233,9 +233,26 @@ class DataProxy(BaseController):
             'phone': address.phone,
             'address': address.address,
             'province': address.province_id.name,
-            'city': address.city.name,
-            'district': address.district.name,
-            'community': address.community.name,
+            'city': address.city_id.name,
+            'district': address.district_id.name,
+            'community': address.community_id.name,
             'is_default': address.is_default,
+        }
+        return data
+
+    def get_cate_data(self, cate):
+        data = {
+            'id': cate.id,
+            'name': cate.name,
+            'parent_id': cate.parent_id or ''
+        }
+        return data
+
+    def get_product_data(self, product):
+        data = {
+            'id': product.id,
+            'name': product.name,
+            'salePrice': product.list_price,
+            'cateId': product.public_categ_ids.id,
         }
         return data
