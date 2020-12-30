@@ -18,7 +18,7 @@ _logger = logging.getLogger(__name__)
 error_code = {
     -99: '',
     -2: '用户名或密码不正确',
-    -1: '服务器内部错误',
+    -1: '操作失败，请稍后尝试',
     0: 'success',
     403: '禁止访问',
     405: '错误的请求类型',
@@ -37,7 +37,10 @@ error_code = {
     401: '该域名已删除',
     402: '该域名已禁用',
     404: '暂无数据',
-    10000: '微信用户未注册'
+    10000: '微信用户未注册',
+
+    1001: '请求值类型错误',
+    1002: '未找到您所选择的地址',
 }
 
 
@@ -60,15 +63,19 @@ class BaseController(object):
         return None, wxapp_entry[0]
 
     def _check_token(self, token):
-        user_info = request.env["walk.access.token"].sudo().check_user(token)
-        if not user_info:
+        open_id = request.env["walk.access.token"].sudo().check_token(token)
+        if isinstance(open_id, int):
             return None
-        union_id = user_info.get('union_id')
-
-        if token:
-            wx_info = request.env["qs.member.info"].sudo().search([("union_id", "=", union_id)])
-            return wx_info.wxapp_open_id
-        return None
+        user = request.env['walk.users'].sudo().search([('open_id', '=', open_id)])
+        if not user:
+            return None
+        return user
+        # union_id = user_info.get('union_id')
+        #
+        # if token:
+        #     wx_info = request.env["qs.member.info"].sudo().search([("union_id", "=", union_id)])
+        #     return wx_info.wxapp_open_id
+        # return None
 
     def _check_get_union_id(self, token):
         user_info = request.env["member.access_token"].sudo().check_user(token)
@@ -172,5 +179,63 @@ class DataProxy(BaseController):
                 'mobile': mobile or '',
                 'userid': ''
             }
+        }
+        return data
+
+    # ##############
+    # 地址相关      #
+    # ##############
+
+    def get_province_data(self, province):
+        data = [
+            {
+                'id': each.id,
+                'name': each.name,
+            }
+            for each in province
+        ]
+        return data
+
+    def get_city_data(self, city):
+        data = [
+            {
+                'id': each.id,
+                'name': each.name,
+            }
+            for each in city
+        ]
+        return data
+
+    def get_district_data(self, district):
+        data = [
+            {
+                'id': each.id,
+                'name': each.name,
+            }
+            for each in district
+        ]
+        return data
+
+    def get_community_data(self, community):
+        data = [
+            {
+                'id': each.id,
+                'name': each.name,
+            }
+            for each in community
+        ]
+        return data
+
+    def get_address_data(self, address):
+        data = {
+            'id': address.id,
+            'name': address.name,
+            'phone': address.phone,
+            'address': address.address,
+            'province': address.province_id.name,
+            'city': address.city.name,
+            'district': address.district.name,
+            'community': address.community.name,
+            'is_default': address.is_default,
         }
         return data

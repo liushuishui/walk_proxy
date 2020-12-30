@@ -31,3 +31,11 @@ class WalkAccessToken(models.TransientModel):
         s = Serializer(secret_key=secret_key, salt=app_id, expires_in=(WalkAccessToken._transient_max_hours * 3600))
         timestamp = time.time()
         return s.dumps({'session_key': self.session_key,  'open_id': self.open_id,  'iat': timestamp})
+
+    def check_token(self, token):
+        token = self.search([('token', '=', token)])
+        if not token:
+            return -1
+        if len(token) > 1:
+            return -2
+        return token.open_id
