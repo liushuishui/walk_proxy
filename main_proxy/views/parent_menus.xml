@@ -8,7 +8,6 @@
                 parent=""
                 sequence="6"
         />
-<!--        web_icon="oejia_weshop,static/description/icon.png"-->
         <menuitem
                 name="设置"
                 id="parent_menu_config_menu"
@@ -20,6 +19,27 @@
                 id="parent_menu_location_menu"
                 parent="parent_menu_config_menu"
                 sequence="10"
+        />
+        <menuitem
+                name="分类"
+                id="parent_menu_category_menu"
+                action="website_sale.product_public_category_action"
+                parent="parent_menu_walk_proxy"
+                sequence="1"
+        />
+        <menuitem
+                name="商品"
+                id="parent_menu_product_menu"
+                action="website_sale.product_template_action_website"
+                parent="parent_menu_walk_proxy"
+                sequence="2"
+        />
+        <menuitem
+                name="订单"
+                id="parent_menu_order_menu"
+                action="website_sale.action_orders_ecommerce"
+                parent="parent_menu_walk_proxy"
+                sequence="3"
         />
 
     </data>
