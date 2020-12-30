@@ -10,19 +10,20 @@ _logger = logging.getLogger(__name__)
 class ResPartnerInherit(models.Model):
     _inherit = 'res.partner'
 
-    phone = fields.Char(index=True)
+    # phone = fields.Char(index=True)
     province_id = fields.Many2one('walk.province', string='省')
     city_id = fields.Many2one('walk.city', string='市')
-    district_id = fields.Many2one('walk.district', string='区')
+    district_id = fields.Many2one('walk.district', string='区/县')
+    community_id = fields.Many2one('walk.community', string='社区')
     address = fields.Char(string='街道地址')
     # street 详细地址
     is_default = fields.Boolean('是否为默认地址')
     city_domain_ids = fields.One2many('walk.city', compute='_compute_city_domain_ids')
     district_domain_ids = fields.One2many('walk.district', compute='_compute_district_domain_ids')
-    wx_address = fields.Char(string='地址')
-    wx_name = fields.Char(string='门牌号')
-    latitude = fields.Char(string='纬度')
-    longitude = fields.Char(string='经度')
+    # wx_address = fields.Char(string='地址')
+    # wx_name = fields.Char(string='门牌号')
+    # latitude = fields.Char(string='纬度')
+    # longitude = fields.Char(string='经度')
 
     @api.onchange('province_id')
     def _onchange_province_id(self):
