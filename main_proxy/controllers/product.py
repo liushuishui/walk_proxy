@@ -3,6 +3,7 @@
 # 产品相关接口
 # -------------------------------------
 from odoo import http
+from odoo.exceptions import MissingError
 
 from .base import DataProxy
 
@@ -56,7 +57,8 @@ class WalkProductApi(http.Controller, DataProxy):
             size = kw.get('size', 20)
             domain = [('sale_ok', '=', True)]
             if cate_id:
-                domain.append(('public_categ_ids', '=', int(cate_id)))
+                category = self.get_model('product.public.category').browse(int(cate_id))
+                domain.append(('public_categ_ids', 'in', [int(cate_id)] + category.child_id.ids))
             product = self.get_model('product.template').search(
                 domain, limit=size,
                 offset=(page - 1) * size
@@ -68,6 +70,9 @@ class WalkProductApi(http.Controller, DataProxy):
                 for each in product
             ]
             return self.res_ok(data)
+        except MissingError:
+            _logger.error('== get_product category id not found: %s' % kw.get('cateId'))
+            return self.res_ok([])
         except ValueError:
             return self.res_err(1001)
         except Exception as e:
@@ -89,9 +94,11 @@ class WalkProductApi(http.Controller, DataProxy):
                 return self.res_err(300)
             product = self.get_model('product.template').browse(int(product_id))
             if not product:
-                return self.res_err([])
+                return self.res_ok([])
             return self.res_ok(self.get_product_data(product))
-
+        except MissingError:
+            _logger.error('== get_product_detail product id not found: %s' % kw.get('productId'))
+            return self.res_ok([])
         except ValueError:
             return self.res_err(1001)
         except Exception as e:

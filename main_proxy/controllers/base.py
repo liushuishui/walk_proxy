@@ -244,7 +244,7 @@ class DataProxy(BaseController):
         data = {
             'id': cate.id,
             'name': cate.name,
-            'parent_id': cate.parent_id or ''
+            'parent_id': cate.parent_id.id or ''
         }
         return data
 
@@ -254,5 +254,6 @@ class DataProxy(BaseController):
             'name': product.name,
             'salePrice': product.list_price,
             'cateId': product.public_categ_ids.id,
+            'imageUrl': product.image_url or ''
         }
         return data
